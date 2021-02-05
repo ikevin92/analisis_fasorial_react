@@ -8,7 +8,7 @@ const TablaResultados = ( { titulos, data } ) => {
 
     return (
 
-        <table className="table table-striped container">
+        <table className="animate__animated animate__fadeInDown table table-striped container">
             <thead>
                 <tr>
                     {

@@ -30,7 +30,7 @@ function App () {
 
             {/* MAIN */ }
             <main className="flex-shrink-0">
-                <div className="container">
+                <div className="animate__animated animate__backInUp  container">
 
                     <div className="bg-light p-5 rounded">
 
@@ -52,7 +52,7 @@ function App () {
                         {/* FORMULARIO DE VOLTAJES */ }
                         {
                             ( tipoMedida > 0 ) && (
-                                <div className="container">
+                                <div className="container animate__animated animate__backInLeft ">
                                     <VoltajesForm
                                         setDataVoltaje={ setDataVoltaje }
                                         tipoMedida={ tipoMedida }
@@ -81,7 +81,7 @@ function App () {
                                 <>
                                     <hr />
 
-                                    <div className="container">
+                                    <div className="container animate__animated animate__backInRight">
                                         <CorrientesForm
                                             setDataCorriente={ setDataCorriente }
                                             tipoMedida={ tipoMedida }

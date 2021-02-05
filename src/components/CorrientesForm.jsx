@@ -94,7 +94,7 @@ const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, set
             }
             <form onSubmit={ handleSubmit } className="row g-2 text-center">
 
-                <div className={ `form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="ia" ><h6>IA</h6></label>
                     <input
                         type="number"
@@ -109,7 +109,7 @@ const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, set
                 </div>
                 {
                     ( tipoMedida > 2 ) &&
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-4 animate__animated animate__fadeIn">
                         <label htmlFor="ib"><h6>IB</h6></label>
                         <input
                             type="number"
@@ -125,7 +125,7 @@ const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, set
 
                 }
 
-                <div className={ `form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="ic"><h6>IC</h6></label>
                     <input
                         name="ic"

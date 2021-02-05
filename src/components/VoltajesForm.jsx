@@ -98,7 +98,7 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
             }
             <form onSubmit={ handleSubmit } className="row g-2 text-center">
 
-                <div className={ `form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="vla" ><h6>VLA</h6></label>
                     <input
                         type="number"
@@ -113,7 +113,7 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
                 </div>
                 {
                     ( tipoMedida > 2 ) &&
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-4 animate__animated animate__fadeIn">
                         <label htmlFor="vlb"><h6>VLB</h6></label>
                         <input
                             type="number"
@@ -129,7 +129,7 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
 
                 }
 
-                <div className={ `form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="vlc"><h6>VLC</h6></label>
                     <input
                         name="vlc"
