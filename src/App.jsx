@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import VoltajesForm from './components/VoltajesForm';
 // import { calculaPromedios, calculoTotal } from './helpers/calculos';
 import CorrientesForm from './components/CorrientesForm';
