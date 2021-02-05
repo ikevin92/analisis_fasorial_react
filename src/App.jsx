@@ -1,13 +1,10 @@
 import { useState } from 'react';
 // import Navbar from './components/Navbar';
 import VoltajesForm from './components/VoltajesForm';
-// import { calculaPromedios, calculoTotal } from './helpers/calculos';
 import CorrientesForm from './components/CorrientesForm';
 import CantidadElementos from './components/CantidadElementos';
 import TablaResultados from './components/TablaResultados';
 import Footer from './components/Footer';
-
-
 
 
 function App () {
@@ -15,6 +12,7 @@ function App () {
     const [ tipoMedida, setTipoMedida ] = useState( 0 );
     const [ tablaVoltajes, setTablaVoltajes ] = useState( false );
     const [ tablaCorrientes, setTablaCorrientes ] = useState( false );
+
     const [ titulos, setTitulos ] = useState( {
         voltajes: [],
         corrientes: []
@@ -26,21 +24,22 @@ function App () {
 
     return (
         <>
-            {/* <Navbar /> */ }
             <header>
-
+                {/* <Navbar /> */ }
             </header>
 
-
+            {/* MAIN */ }
             <main className="flex-shrink-0">
                 <div className="container">
 
-
                     <div className="bg-light p-5 rounded">
+
                         <h1 className="text-center">ANALISIS FASORIAL</h1>
                         <p className="lead">Seleccione el numero de elementos e ingrese los datos:</p>
 
-                        <div className=" row container">
+
+                        {/* CANTIDAD DE ELEMENTOS */ }
+                        <div className="row container">
                             <CantidadElementos
                                 setTipoMedida={ setTipoMedida }
                                 setTablaVoltajes={ setTablaVoltajes }
@@ -61,7 +60,6 @@ function App () {
                                         setTitulos={ setTitulos }
                                     />
                                 </div>
-
                             )
                         }
 
@@ -77,11 +75,7 @@ function App () {
                             )
                         }
 
-
-
                         {/* FORMULARIO DE CORRIENTES */ }
-
-
                         {
                             ( tipoMedida > 0 ) && (
                                 <>
@@ -95,12 +89,9 @@ function App () {
                                             setTitulos={ setTitulos }
                                         />
                                     </div>
-
                                 </>
-
                             )
                         }
-
 
                         {/* TABLA RESULTADO CORRIENTES */ }
                         {
@@ -114,9 +105,7 @@ function App () {
                             )
                         }
 
-
                     </div>
-
 
                 </div>
 
@@ -125,9 +114,8 @@ function App () {
 
 
             {/* FOOTER */ }
+            <Footer />
 
-             <Footer />
-         
         </>
     );
 }
