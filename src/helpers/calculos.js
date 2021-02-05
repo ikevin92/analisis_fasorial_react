@@ -102,3 +102,22 @@ export const calculosTotales = ( bases, valores ) => {
     return resultados;
 };
 
+
+export const colorDesviacion = ( valor ) => {
+
+    valor = Math.abs( valor );
+
+    let className;
+
+    if ( valor >= 0 && valor <= 2 ) {
+        className = 'table-success';
+    } else if ( valor > 2 && valor <= 5 ) {
+        className = 'table-warning';
+    }
+    else if ( valor > 5 ) {
+        className = 'table-danger';
+    }
+
+
+    return className;
+};

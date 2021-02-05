@@ -3,10 +3,6 @@ import Error from './Error';
 import { calculaPromedio, calculaMaximo, calculaMinimo, calculosTotales } from '../helpers/calculos';
 import { obtenerEncabezados } from '../helpers/encabezados';
 
-
-
-
-
 const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, setTitulos } ) => {
 
     const [ formValues, setFormValues ] = useState( {

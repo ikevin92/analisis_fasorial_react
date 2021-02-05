@@ -15,6 +15,7 @@ const CantidadElementos = ( { setTipoMedida, setTablaVoltajes } ) => {
             setTablaVoltajes( false );
         } else {
             setTipoMedida( elementos )
+            setTablaVoltajes( false );
         }
 
     }, [elementos, setTablaVoltajes, setTipoMedida] );

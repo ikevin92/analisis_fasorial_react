@@ -1,10 +1,10 @@
 
+import { colorDesviacion } from '../helpers/calculos';
 
 
 const TablaResultados = ( { titulos, data } ) => {
 
 
-    console.log( "DATA TABLE;", data );
 
     return (
 
@@ -25,12 +25,12 @@ const TablaResultados = ( { titulos, data } ) => {
                         <tr key={ index }>
                             <th scope="row">{ item.desc }</th>
                             <th scope="row">{ item.base }</th>
-                            <td>{ item.a }%</td>
+                            <td className={`${colorDesviacion(item.a)}`}>{ item.a }%</td>
                             { item.b &&
-                                <td>{ item.b }%</td>
+                                <td className={ `${ colorDesviacion( item.b ) }` } >{ item.b }%</td>
                             }
 
-                            <td>{ item.c }%</td>
+                            <td className={ `${ colorDesviacion( item.c ) }` }>{ item.c }%</td>
                         </tr>
                     ) )
                 }
