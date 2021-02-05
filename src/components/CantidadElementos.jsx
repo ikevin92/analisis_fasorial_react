@@ -1,26 +1,28 @@
 
 import { useEffect, useState } from 'react';
 
-const CantidadElementos = ( { setTipoMedida, setTablaVoltajes } ) => {
+const CantidadElementos = ( { setTipoMedida, setTablaVoltajes, setTablaCorrientes } ) => {
 
-    const [ elementos, setElementos ] = useState( 0 )
-    
+    const [ elementos, setElementos ] = useState( 0 );
+
     const handleChange = ( { target } ) => {
         setElementos( parseInt( target.value ) );
-    }
+    };
 
     useEffect( () => {
         if ( elementos === 0 ) {
-            setTipoMedida( elementos )
+            setTipoMedida( elementos );
             setTablaVoltajes( false );
+            setTablaCorrientes( false );
         } else {
-            setTipoMedida( elementos )
+            setTipoMedida( elementos );
             setTablaVoltajes( false );
+            setTablaCorrientes( false );
         }
 
-    }, [elementos, setTablaVoltajes, setTipoMedida] );
+    }, [elementos, setTablaCorrientes, setTablaVoltajes, setTipoMedida] );
 
-   
+
     return (
         <select
             name="tipoMedida"

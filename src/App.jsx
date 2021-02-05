@@ -37,6 +37,7 @@ function App () {
                         <CantidadElementos
                             setTipoMedida={ setTipoMedida }
                             setTablaVoltajes={ setTablaVoltajes }
+                            setTablaCorrientes={ setTablaCorrientes }
                         />
                     </div>
 
