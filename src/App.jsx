@@ -5,6 +5,7 @@ import VoltajesForm from './components/VoltajesForm';
 import CorrientesForm from './components/CorrientesForm';
 import CantidadElementos from './components/CantidadElementos';
 import TablaResultados from './components/TablaResultados';
+import Footer from './components/Footer';
 
 
 
@@ -26,94 +27,107 @@ function App () {
     return (
         <>
             {/* <Navbar /> */ }
+            <header>
+
+            </header>
 
 
-            <main className="container ">
-                <div className="bg-light p-5 rounded">
-                    <h1 className="text-center">ANALISIS FASORIAL</h1>
-                    <p className="lead">Seleccione el numero de elementos e ingrese los datos:</p>
-
-                    <div className=" row container">
-                        <CantidadElementos
-                            setTipoMedida={ setTipoMedida }
-                            setTablaVoltajes={ setTablaVoltajes }
-                            setTablaCorrientes={ setTablaCorrientes }
-                        />
-                    </div>
-
-                    <hr />
-
-                    {/* FORMULARIO DE VOLTAJES */ }
-                    {
-                        ( tipoMedida > 0 ) && (
-                            <div className="container">
-                                <VoltajesForm
-                                    setDataVoltaje={ setDataVoltaje }
-                                    tipoMedida={ tipoMedida }
-                                    setTablaVoltajes={ setTablaVoltajes }
-                                    setTitulos={ setTitulos }
-                                />
-                            </div>
-
-                        )
-                    }
-
-                    {/* TABLA RESULTADO VOLTAJES */ }
-                    {
-                        tablaVoltajes && (
-                            <div className="table-responsive mt-3">
-                                <TablaResultados
-                                    titulos={ titulos }
-                                    data={ dataVoltaje }
-                                />
-                            </div>
-                        )
-                    }
+            <main className="flex-shrink-0">
+                <div className="container">
 
 
+                    <div className="bg-light p-5 rounded">
+                        <h1 className="text-center">ANALISIS FASORIAL</h1>
+                        <p className="lead">Seleccione el numero de elementos e ingrese los datos:</p>
 
-                    {/* FORMULARIO DE CORRIENTES */ }
+                        <div className=" row container">
+                            <CantidadElementos
+                                setTipoMedida={ setTipoMedida }
+                                setTablaVoltajes={ setTablaVoltajes }
+                                setTablaCorrientes={ setTablaCorrientes }
+                            />
+                        </div>
 
+                        <hr />
 
-                    {
-                        ( tipoMedida > 0 ) && (
-                            <>
-                                <hr />
-
+                        {/* FORMULARIO DE VOLTAJES */ }
+                        {
+                            ( tipoMedida > 0 ) && (
                                 <div className="container">
-                                    <CorrientesForm
-                                        setDataCorriente={ setDataCorriente }
+                                    <VoltajesForm
+                                        setDataVoltaje={ setDataVoltaje }
                                         tipoMedida={ tipoMedida }
-                                        setTablaCorrientes={ setTablaCorrientes }
+                                        setTablaVoltajes={ setTablaVoltajes }
                                         setTitulos={ setTitulos }
                                     />
                                 </div>
 
-                            </>
+                            )
+                        }
 
-                        )
-                    }
+                        {/* TABLA RESULTADO VOLTAJES */ }
+                        {
+                            tablaVoltajes && (
+                                <div className="table-responsive mt-3">
+                                    <TablaResultados
+                                        titulos={ titulos }
+                                        data={ dataVoltaje }
+                                    />
+                                </div>
+                            )
+                        }
 
 
-                    {/* TABLA RESULTADO CORRIENTES */ }
-                    {
-                        tablaCorrientes && (
-                            <div className="row container mt-3">
-                                <TablaResultados
-                                    titulos={ titulos }
-                                    data={ dataCorriente }
-                                />
-                            </div>
-                        )
-                    }
+
+                        {/* FORMULARIO DE CORRIENTES */ }
+
+
+                        {
+                            ( tipoMedida > 0 ) && (
+                                <>
+                                    <hr />
+
+                                    <div className="container">
+                                        <CorrientesForm
+                                            setDataCorriente={ setDataCorriente }
+                                            tipoMedida={ tipoMedida }
+                                            setTablaCorrientes={ setTablaCorrientes }
+                                            setTitulos={ setTitulos }
+                                        />
+                                    </div>
+
+                                </>
+
+                            )
+                        }
+
+
+                        {/* TABLA RESULTADO CORRIENTES */ }
+                        {
+                            tablaCorrientes && (
+                                <div className="row container mt-3">
+                                    <TablaResultados
+                                        titulos={ titulos }
+                                        data={ dataCorriente }
+                                    />
+                                </div>
+                            )
+                        }
+
+
+                    </div>
 
 
                 </div>
 
-
-
             </main>
 
+
+
+            {/* FOOTER */ }
+
+             <Footer />
+         
         </>
     );
 }

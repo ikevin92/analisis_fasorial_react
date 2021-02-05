@@ -2,3 +2,14 @@ body {
   min-height: 75rem;
   padding-top: 4.5rem;
 }
+/* 
+main > .container {
+  padding: 60px 15px 0;
+} */
+
+footer {
+    position: fixed;
+    /* height: 10; */
+    bottom: 0;
+    width: 100%;
+}
