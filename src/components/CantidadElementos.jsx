@@ -1,35 +1,35 @@
 
 import { useEffect, useState } from 'react';
 
-const CantidadElementos = ( { setTipoMedida, setTablaVoltajes, setTablaCorrientes } ) => {
+const CantidadElementos = ( { setElementos, setTablaVoltajes, setTablaCorrientes } ) => {
 
-    const [ elementos, setElementos ] = useState( 0 );
+    const [ elementos, setCantElementos ] = useState( 0 );
 
     const handleChange = ( { target } ) => {
-        setElementos( parseInt( target.value ) );
+        setCantElementos( parseInt( target.value ) );
     };
 
     useEffect( () => {
         if ( elementos === 0 ) {
-            setTipoMedida( elementos );
+            setElementos( elementos );
             setTablaVoltajes( false );
             setTablaCorrientes( false );
         } else {
-            setTipoMedida( elementos );
+            setElementos( elementos );
             setTablaVoltajes( false );
             setTablaCorrientes( false );
         }
 
-    }, [elementos, setTablaCorrientes, setTablaVoltajes, setTipoMedida] );
+    }, [ elementos, setTablaCorrientes, setTablaVoltajes, setElementos] );
 
 
     return (
         <select
-            name="tipoMedida"
+            name="elementos"
             // value="0"
             onChange={ handleChange }
             className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option value="0">Seleccione el Tipo de Medida</option>
+            <option value="0">Seleccione Cant Elementos</option>
             <option value="2">Dos Elementos</option>
             <option value="3">Tres Elementos</option>
         </select>

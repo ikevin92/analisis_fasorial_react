@@ -6,8 +6,8 @@ const Footer = () => {
 
     return (
         <footer class="footer mt-auto py-3 bg-light">
-            <div class="container">
-                <span class="text-muted">&copy; Copyright { year }   ANALISIS FASORIAL - Desarrollado por Kevin Echeverri.</span>
+            <div class="container text-center">
+                <span class="text-muted">&copy; Copyright { year } ANALISIS FASORIAL - Desarrollado por Kevin Echeverri.</span>
             </div>
         </footer>
 

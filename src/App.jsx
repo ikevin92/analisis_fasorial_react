@@ -1,25 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import Navbar from './components/Navbar';
 import VoltajesForm from './components/VoltajesForm';
 import CorrientesForm from './components/CorrientesForm';
 import CantidadElementos from './components/CantidadElementos';
 import TablaResultados from './components/TablaResultados';
 import Footer from './components/Footer';
+import TipoMedida from './components/TipoMedida';
 
 
 function App () {
 
-    const [ tipoMedida, setTipoMedida ] = useState( 0 );
+    const [ tipoMedida, setTipoMedida ] = useState( '' );
+    const [ elementos, setElementos ] = useState( 0 );
+    const [ mostrarElementos, setMostrarElementos ] = useState( false );
     const [ tablaVoltajes, setTablaVoltajes ] = useState( false );
     const [ tablaCorrientes, setTablaCorrientes ] = useState( false );
+    const [ dataVoltaje, setDataVoltaje ] = useState( [] );
+    const [ dataCorriente, setDataCorriente ] = useState( [] );
+
+    // estate para manejar el evento de ocultar y mostrar 
+    const [ mostrarTodo, setMostrarTodo ] = useState( false );
 
     const [ titulos, setTitulos ] = useState( {
         voltajes: [],
         corrientes: []
     } );
 
-    const [ dataVoltaje, setDataVoltaje ] = useState( [] );
-    const [ dataCorriente, setDataCorriente ] = useState( [] );
+    useEffect( () => {
+        if ( mostrarElementos ) {
+            setMostrarTodo( true );
+        } else {
+            setMostrarTodo( false );
+        }
+    }, [ mostrarElementos ] );
+
 
 
     return (
@@ -35,75 +49,97 @@ function App () {
                     <div className="bg-light p-5 rounded">
 
                         <h1 className="text-center">ANALISIS FASORIAL</h1>
-                        <p className="lead">Seleccione el numero de elementos e ingrese los datos:</p>
+                        <p className="lead">Seleccione el tipo de Medida e ingrese los datos:</p>
 
 
-                        {/* CANTIDAD DE ELEMENTOS */ }
+                        {/* TIPO MEDIDA */ }
                         <div className="row container">
-                            <CantidadElementos
-                                setTipoMedida={ setTipoMedida }
-                                setTablaVoltajes={ setTablaVoltajes }
-                                setTablaCorrientes={ setTablaCorrientes }
+                            <TipoMedida
+                                setMostrarElementos={ setMostrarElementos }
+                                guardarTipoMedida={ setTipoMedida }
                             />
                         </div>
 
+
+                        {/* CANTIDAD DE ELEMENTOS */ }
+                        {
+                            mostrarElementos && (
+                                <div className="row container">
+                                    <CantidadElementos
+                                        setElementos={ setElementos }
+                                        setTablaVoltajes={ setTablaVoltajes }
+                                        setTablaCorrientes={ setTablaCorrientes }
+                                    />
+                                </div>
+                            )
+                        }
+
+
                         <hr />
 
-                        {/* FORMULARIO DE VOLTAJES */ }
                         {
-                            ( tipoMedida > 0 ) && (
-                                <div className="container animate__animated animate__backInLeft ">
-                                    <VoltajesForm
-                                        setDataVoltaje={ setDataVoltaje }
-                                        tipoMedida={ tipoMedida }
-                                        setTablaVoltajes={ setTablaVoltajes }
-                                        setTitulos={ setTitulos }
-                                    />
-                                </div>
-                            )
-                        }
-
-                        {/* TABLA RESULTADO VOLTAJES */ }
-                        {
-                            tablaVoltajes && (
-                                <div className="table-responsive mt-3">
-                                    <TablaResultados
-                                        titulos={ titulos }
-                                        data={ dataVoltaje }
-                                    />
-                                </div>
-                            )
-                        }
-
-                        {/* FORMULARIO DE CORRIENTES */ }
-                        {
-                            ( tipoMedida > 0 ) && (
+                            mostrarTodo && (
                                 <>
-                                    <hr />
+                                    {/* FORMULARIO DE VOLTAJES */ }
+                                    {
+                                        ( elementos > 0 ) && (
+                                            <div className="container animate__animated animate__backInLeft ">
+                                                <VoltajesForm
+                                                    setDataVoltaje={ setDataVoltaje }
+                                                    tipoMedida={ elementos }
+                                                    setTablaVoltajes={ setTablaVoltajes }
+                                                    setTitulos={ setTitulos }
+                                                />
+                                            </div>
+                                        )
+                                    }
 
-                                    <div className="container animate__animated animate__backInRight">
-                                        <CorrientesForm
-                                            setDataCorriente={ setDataCorriente }
-                                            tipoMedida={ tipoMedida }
-                                            setTablaCorrientes={ setTablaCorrientes }
-                                            setTitulos={ setTitulos }
-                                        />
-                                    </div>
+                                    {/* TABLA RESULTADO VOLTAJES */ }
+                                    {
+                                        tablaVoltajes && (
+                                            <div className="table-responsive mt-3">
+                                                <TablaResultados
+                                                    titulos={ titulos.voltajes }
+                                                    data={ dataVoltaje }
+                                                />
+                                            </div>
+                                        )
+                                    }
+
+                                    {/* FORMULARIO DE CORRIENTES */ }
+                                    {
+                                        ( elementos > 0 ) && (
+                                            <>
+                                                <hr />
+
+                                                <div className="container animate__animated animate__backInRight">
+                                                    <CorrientesForm
+                                                        setDataCorriente={ setDataCorriente }
+                                                        tipoMedida={ elementos }
+                                                        setTablaCorrientes={ setTablaCorrientes }
+                                                        setTitulos={ setTitulos }
+                                                    />
+                                                </div>
+                                            </>
+                                        )
+                                    }
+
+                                    {/* TABLA RESULTADO CORRIENTES */ }
+                                    {
+                                        tablaCorrientes && (
+                                            <div className="row container mt-3">
+                                                <TablaResultados
+                                                    titulos={ titulos.corrientes }
+                                                    data={ dataCorriente }
+                                                />
+                                            </div>
+                                        )
+                                    }
                                 </>
                             )
                         }
 
-                        {/* TABLA RESULTADO CORRIENTES */ }
-                        {
-                            tablaCorrientes && (
-                                <div className="row container mt-3">
-                                    <TablaResultados
-                                        titulos={ titulos }
-                                        data={ dataCorriente }
-                                    />
-                                </div>
-                            )
-                        }
+
 
                     </div>
 

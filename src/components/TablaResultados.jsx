@@ -5,18 +5,16 @@ import { colorDesviacion } from '../helpers/calculos';
 const TablaResultados = ( { titulos, data } ) => {
 
 
-
     return (
 
         <table className="animate__animated animate__fadeInDown table table-striped container">
             <thead>
                 <tr>
                     {
-                        titulos.voltajes.map( ( titulo, index ) => (
+                        titulos.map( ( titulo, index ) => (
                             <th scope="col" key={ index }>{ titulo }</th>
                         ) )
                     }
-
                 </tr>
             </thead>
             <tbody>

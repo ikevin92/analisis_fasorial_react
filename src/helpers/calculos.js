@@ -42,9 +42,7 @@ const objectToArray = ( object ) => {
 
 };
 
-export const calculosFases = ( data ) => {
-    console.log( "fases: ", data );
-};
+
 
 export const calcularDesbalance = ( base, valor ) => {
     // console.log( base, valor );
@@ -57,7 +55,7 @@ export const calcularDesbalance = ( base, valor ) => {
 
     const desbalance = res.toFixed( 2 );
 
-    console.log( "DESBALANCE: ", desbalance );
+    // console.log( "DESBALANCE: ", desbalance );
 
     return desbalance;
 };
@@ -121,3 +119,29 @@ export const colorDesviacion = ( valor ) => {
 
     return className;
 };
+
+
+
+export const obtenerCorrienteMax = ( tipoMedida ) => {
+    console.log( tipoMedida );
+    let value = 0;
+
+    switch ( tipoMedida ) {
+        case 'directa':
+            value = 100;
+            break;
+        case 'semi':
+            value = 10;
+            break;
+        case 'indirecta':
+            value = 5;
+            break;
+
+        default:
+            break;
+    }
+
+    return value;
+
+};
+

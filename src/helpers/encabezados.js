@@ -1,9 +1,9 @@
 
 
-export const obtenerEncabezados = ( tipoMedida ) => {
+export const obtenerEncabezados = ( elementos ) => {
     let encabezado = {};
 
-    switch ( tipoMedida ) {
+    switch ( elementos ) {
         case 2:
             encabezado = {
                 voltajes: [ 'DESC', 'BASE', 'VLA', 'VLC' ],
@@ -46,9 +46,6 @@ export const obtenerDescripcion = ( descripcion ) => {
     }
 
     return value;
-
-
-
 
 };
 
