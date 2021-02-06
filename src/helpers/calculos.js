@@ -115,7 +115,7 @@ export const calcularTipoCarga = ( angulos ) => {
         value = a.slice( -1 );
         console.log( a );
 
-        temp[ value ] = obtenerTipoCarga( angulos[ a ] );
+        temp[ value ] = obtenerTipoCarga( parseFloat( angulos[ a ] ) );
 
 
     }
@@ -154,7 +154,7 @@ export const colorDesviacion = ( valor ) => {
             case 'CAPACITIVA':
                 className = 'table-primary';
                 break;
-            
+
             case 'INDUCTIVA':
                 className = 'table-secondary';
                 break;
@@ -164,9 +164,6 @@ export const colorDesviacion = ( valor ) => {
         }
 
     }
-
-
-
 
     return className;
 };
