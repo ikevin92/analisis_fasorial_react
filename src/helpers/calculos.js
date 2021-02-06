@@ -62,8 +62,8 @@ export const calcularDesbalance = ( base, valor ) => {
 
 
 export const calculosTotales = ( bases, valores ) => {
-    console.log( "bases: ", bases );
-    console.log( "valores: ", valores );
+    // console.log( "bases: ", bases );
+    // console.log( "valores: ", valores );
     let resultados = [];
     let value = '';
 
@@ -85,7 +85,7 @@ export const calculosTotales = ( bases, valores ) => {
             value = v.slice( -1 );
             console.log( value );
 
-            temp[ value ] = calcularDesbalance( bases[ b ], valores[ v ] );
+            temp[ value ] = calcularDesbalance( bases[ b ], valores[ v ] ) + "%";
         }
 
         resultados.push( {
@@ -94,27 +94,78 @@ export const calculosTotales = ( bases, valores ) => {
 
     }
 
-    console.log( "resultados totales: ", resultados );
+    // console.log( "resultados totales: ", resultados );
 
 
     return resultados;
 };
 
 
+export const calcularTipoCarga = ( angulos ) => {
+    let resultados = [];
+    let value = '';
+    let temp = {
+        desc: 'TIPO DE CARGA'
+    };
+
+    console.log( angulos );
+
+    for ( const a in angulos ) {
+        // extrae ultima letra del elemento
+        value = a.slice( -1 );
+        console.log( a );
+
+        temp[ value ] = obtenerTipoCarga( angulos[ a ] );
+
+
+    }
+
+    resultados.push( {
+        ...temp
+    } );
+
+    // console.log("CALCULAR TIPO CARGA: ", resultados );
+
+    return resultados;
+
+};
+
+
+
 export const colorDesviacion = ( valor ) => {
-
-    valor = Math.abs( valor );
-
+    console.log( valor );
+    console.log( typeof ( valor ) === 'number' );
     let className;
 
-    if ( valor >= 0 && valor <= 2 ) {
-        className = 'table-success';
-    } else if ( valor > 2 && valor <= 5 ) {
-        className = 'table-warning';
+    if ( typeof ( valor ) === 'number' ) {
+        valor = Math.abs( valor );
+
+        if ( valor >= 0 && valor <= 2 ) {
+            className = 'table-success';
+        } else if ( valor > 2 && valor <= 5 ) {
+            className = 'table-warning';
+        }
+        else if ( valor > 5 ) {
+            className = 'table-danger';
+        }
+    } else {
+
+        switch ( valor ) {
+            case 'CAPACITIVA':
+                className = 'table-primary';
+                break;
+            
+            case 'INDUCTIVA':
+                className = 'table-secondary';
+                break;
+
+            default:
+                break;
+        }
+
     }
-    else if ( valor > 5 ) {
-        className = 'table-danger';
-    }
+
+
 
 
     return className;
@@ -142,6 +193,21 @@ export const obtenerCorrienteMax = ( tipoMedida ) => {
     }
 
     return value;
+
+};
+
+
+export const obtenerTipoCarga = ( value ) => {
+
+    let tipoCarga;
+
+    if ( value < 0 ) {
+        tipoCarga = 'CAPACITIVA';
+    } else {
+        tipoCarga = 'INDUCTIVA';
+    }
+
+    return tipoCarga;
 
 };
 

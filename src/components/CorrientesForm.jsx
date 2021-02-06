@@ -22,7 +22,7 @@ const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, set
     // cambiamos los values en el state
     const handleInputChange = ( { target } ) => {
         // console.log( setDataVoltaje );
-        console.log( target.name );
+        // console.log( target.name );
         setFormValues( {
             ...formValues,
             [ target.name ]: parseFloat( target.value )
@@ -32,7 +32,7 @@ const CorrientesForm = ( { setDataCorriente, tipoMedida, setTablaCorrientes, set
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
-        console.log( formValues );
+        // console.log( formValues );
 
         // VALIDACION TIPO MEDIDA
         if ( tipoMedida === 2 ) {

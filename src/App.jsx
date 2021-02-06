@@ -6,6 +6,8 @@ import CantidadElementos from './components/CantidadElementos';
 import TablaResultados from './components/TablaResultados';
 import Footer from './components/Footer';
 import TipoMedida from './components/TipoMedida';
+import Diagnostico from './components/Diagnostico';
+import AngulosForm from './components/AngulosForm';
 
 
 function App () {
@@ -13,10 +15,16 @@ function App () {
     const [ tipoMedida, setTipoMedida ] = useState( '' );
     const [ elementos, setElementos ] = useState( 0 );
     const [ mostrarElementos, setMostrarElementos ] = useState( false );
+    const [ mostrarDiagnostico, setMostrarDiagnostico ] = useState( false );
+    // state para mostrar u ocultrar tablas
     const [ tablaVoltajes, setTablaVoltajes ] = useState( false );
     const [ tablaCorrientes, setTablaCorrientes ] = useState( false );
+    const [ tablaAngulos, setTablaAngulos ] = useState( false );
+
+    // state para capturar data
     const [ dataVoltaje, setDataVoltaje ] = useState( [] );
     const [ dataCorriente, setDataCorriente ] = useState( [] );
+    const [ dataAngulos, setDataAngulos ] = useState( [] );
 
     // estate para manejar el evento de ocultar y mostrar 
     const [ mostrarTodo, setMostrarTodo ] = useState( false );
@@ -43,8 +51,8 @@ function App () {
             </header>
 
             {/* MAIN */ }
-            <main className="flex-shrink-0">
-                <div className="animate__animated animate__backInUp  container">
+            <main className="flex-shrink-0 mt-4">
+                <div className="animate__animated animate__backInUp container mt-10">
 
                     <div className="bg-light p-5 rounded">
 
@@ -69,6 +77,7 @@ function App () {
                                         setElementos={ setElementos }
                                         setTablaVoltajes={ setTablaVoltajes }
                                         setTablaCorrientes={ setTablaCorrientes }
+                                        setTablaAngulos={ setTablaAngulos }
                                     />
                                 </div>
                             )
@@ -135,6 +144,50 @@ function App () {
                                             </div>
                                         )
                                     }
+
+
+                                    {/* FORMULARIO ANGULOS CORRIENTE */ }
+                                    {
+                                        ( elementos > 0 ) && (
+                                            <>
+                                                <hr />
+
+                                                <div className="container animate__animated animate__backInRight">
+                                                    <AngulosForm
+                                                        setDataAngulos={ setDataAngulos }
+                                                        elementos={ elementos }
+                                                        setTablaAngulos={ setTablaAngulos }
+                                                        setTitulos={ setTitulos }
+                                                    />
+                                                </div>
+                                            </>
+                                        )
+                                    }
+
+                                    {/* TABLA RESULTADO ANGULOS CORRIENTE */ }
+                                    {
+                                        tablaAngulos && (
+                                            <div className="row container mt-3">
+                                                <TablaResultados
+                                                    titulos={ titulos.angulos }
+                                                    data={ dataAngulos }
+                                                />
+                                            </div>
+                                        )
+                                    }
+
+
+
+                                    {/* TABLA DE DIAGNOSTICOS */ }
+                                    {
+                                        mostrarDiagnostico && (
+                                            <Diagnostico
+
+                                            />
+                                        )
+
+                                    }
+
                                 </>
                             )
                         }

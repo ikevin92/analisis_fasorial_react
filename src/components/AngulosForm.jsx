@@ -1,26 +1,21 @@
 import { useState } from 'react';
 import Error from './Error';
-import { calculaPromedio, calculaMaximo, calculaMinimo, calculosTotales } from '../helpers/calculos';
 import { obtenerEncabezados } from '../helpers/encabezados';
+import { calcularTipoCarga } from '../helpers/calculos';
 
-
-
-
-
-const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulos } ) => {
+const AngulosForm = ( { elementos, setDataAngulos, setTitulos, setTablaAngulos } ) => {
 
     const [ formValues, setFormValues ] = useState( {
-        vla: 0,
-        vlb: 0,
-        vlc: 0
+        ia: 0,
+        ib: 0,
+        ic: 0
     } );
 
     const [ error, setError ] = useState( false );
     const [ mensajeError, setMensajeError ] = useState( '' );
 
 
-    const { vla, vlb, vlc } = formValues;
-    // const { promedio, max, min } = resultados;
+    const { ia, ib, ic } = formValues;
 
     // Leer los datos del formulario y colocarlos en el state
     // cambiamos los values en el state
@@ -29,28 +24,28 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
         // console.log( target.name );
         setFormValues( {
             ...formValues,
-            [ target.name ]: parseFloat( target.value )
+            // [ target.name ]: parseFloat( target.value )
+            [ target.name ]: ( target.value )
         } );
 
     };
 
-    const handleSubmit = async ( e ) => {
+    const handleSubmit = ( e ) => {
         e.preventDefault();
-        console.log( formValues );
 
         // VALIDACION TIPO MEDIDA
-        if ( tipoMedida === 2 ) {
+        if ( elementos === 2 ) {
 
             // se borra 1 elemento
-            delete formValues.vlb;
-            if ( isNaN( vla ) || isNaN( vlc ) ) {
+            delete formValues.ib;
+            if ( isNaN( ia ) || isNaN( ic ) ) {
                 setError( true );
                 setMensajeError( "No se permiten valor nulos" );
                 return;
             }
         } else {
             // validando nulos
-            if ( isNaN( vla ) || isNaN( vlb ) || isNaN( vlc ) ) {
+            if ( isNaN( ia ) || isNaN( ib ) || isNaN( ic ) ) {
                 setError( true );
                 setMensajeError( "No se permiten valor nulos" );
                 return;
@@ -58,23 +53,21 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
 
         }
 
-        const bases = {
-            promedio: calculaPromedio( formValues ),
-            max: calculaMaximo( formValues ),
-            min: calculaMinimo( formValues ),
-        };
+        // const bases = {
+        //     promedio: calculaPromedio( formValues ),
+        //     max: calculaMaximo( formValues ),
+        //     min: calculaMinimo( formValues ),
+        // };
 
-        // const { promedio, max, min } = bases;
+        // RETORNAMOS EL TIPO DE CARGA DE CADA ELEMENTO
+        const data = calcularTipoCarga( formValues );
+        // console.log( "DATA FORM: ", data );
+        setDataAngulos( data );
 
-        // funcion para el calculo total
-        const data = calculosTotales( bases, formValues );
-        setDataVoltaje( data );
+        setTablaAngulos( true );
+        const encabezados = obtenerEncabezados( elementos );
+        // console.log( encabezados );
 
-
-        setTablaVoltajes( true );
-
-        const encabezados = obtenerEncabezados( tipoMedida );
-        console.log( encabezados );
 
         setTitulos( encabezados );
 
@@ -85,10 +78,9 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
     };
 
 
-
     return (
         <>
-            <h2>Voltajes</h2>
+            <h2>Angulos Corrientes</h2>
 
             {
                 error &&
@@ -98,47 +90,45 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
             }
             <form onSubmit={ handleSubmit } className="row g-2 text-center">
 
-                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
-                    <label htmlFor="vla" ><h6>VLA</h6></label>
+                <div className={ `animate__animated animate__fadeIn form-group ${ elementos > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                    <label htmlFor="ia" ><h6>IA°</h6></label>
                     <input
                         type="number"
-                        name="vla"
+                        name="ia"
                         className="form-control"
-                        placeholder="VLA"
-                        min="1"
+                        placeholder="IA°"
+
                         step="any"
-                        value={ vla }
+                        value={ ia }
                         onChange={ handleInputChange }
                     />
                 </div>
                 {
-                    ( tipoMedida > 2 ) &&
+                    ( elementos > 2 ) &&
                     <div className="form-group col-md-4 animate__animated animate__fadeIn">
-                        <label htmlFor="vlb"><h6>VLB</h6></label>
+                        <label htmlFor="ib"><h6>IB°</h6></label>
                         <input
                             type="number"
-                            name="vlb"
+                            name="ib"
                             className="form-control"
-                            placeholder="VLB"
-                            min="1"
-                            step="any"
-                            value={ vlb }
+                            placeholder="IB"
+                            // step="any"
+                            value={ ib }
                             onChange={ handleInputChange }
                         />
                     </div>
 
                 }
 
-                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
-                    <label htmlFor="vlc"><h6>VLC</h6></label>
+                <div className={ `animate__animated animate__fadeIn form-group ${ elementos > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                    <label htmlFor="ic"><h6>IC°</h6></label>
                     <input
-                        name="vlc"
+                        name="ic"
                         type="number"
                         className="form-control"
-                        placeholder="VLC"
-                        min="1"
+                        placeholder="IC°"
                         step="any"
-                        value={ vlc }
+                        value={ ic }
                         onChange={ handleInputChange }
                     />
                 </div>
@@ -154,4 +144,4 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
     );
 };
 
-export default VoltajesForm;
+export default AngulosForm;

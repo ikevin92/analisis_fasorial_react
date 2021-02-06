@@ -22,13 +22,17 @@ const TablaResultados = ( { titulos, data } ) => {
                     data.map( ( item, index ) => (
                         <tr key={ index }>
                             <th scope="row">{ item.desc }</th>
-                            <th scope="row">{ item.base }</th>
-                            <td className={`${colorDesviacion(item.a)}`}>{ item.a }%</td>
+                            {
+                                item.base && (
+                                    <th scope="row">{ item.base }</th>
+                                )
+                            }
+                            <td className={ `${ colorDesviacion( item.a ) }` }>{ item.a }</td>
                             { item.b &&
-                                <td className={ `${ colorDesviacion( item.b ) }` } >{ item.b }%</td>
+                                <td className={ `${ colorDesviacion( item.b ) }` } >{ item.b }</td>
                             }
 
-                            <td className={ `${ colorDesviacion( item.c ) }` }>{ item.c }%</td>
+                            <td className={ `${ colorDesviacion( item.c ) }` }>{ item.c }</td>
                         </tr>
                     ) )
                 }

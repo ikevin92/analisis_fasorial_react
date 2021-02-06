@@ -7,13 +7,15 @@ export const obtenerEncabezados = ( elementos ) => {
         case 2:
             encabezado = {
                 voltajes: [ 'DESC', 'BASE', 'VLA', 'VLC' ],
-                corrientes: [ 'DESC', 'BASE', 'IA', 'IC' ]
+                corrientes: [ 'DESC', 'BASE', 'IA', 'IC' ],
+                angulos: [ 'DESC', 'IA°', 'IC°', ],
             };
             break;
         case 3:
             encabezado = {
                 voltajes: [ 'DESC', 'BASE', 'VLA', 'VLB', 'VLC' ],
-                corrientes: [ 'DESC', 'BASE', 'IA', 'IB', 'IC' ]
+                corrientes: [ 'DESC', 'BASE', 'IA', 'IB', 'IC' ],
+                angulos: [ 'DESC', 'IA°', 'IB°', 'IC°', ],
             };
             break;
 
