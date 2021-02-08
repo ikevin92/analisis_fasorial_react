@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Error from './Error';
+import Error from './ui/Error';
 import { obtenerEncabezados } from '../helpers/encabezados';
 import { calcularTipoCarga } from '../helpers/calculos';
 

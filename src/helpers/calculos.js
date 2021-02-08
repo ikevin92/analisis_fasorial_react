@@ -19,12 +19,15 @@ export const calculaPromedio = ( objeto ) => {
     // se convierte el objeto en un array
     const datos = objectToArray( objeto );
 
+   
+
     // sumamos los elementos del array
     const suma = datos.reduce( ( previous, current ) => current += previous );
 
 
-    const promedio = ( suma / datos.length ).toFixed( 2 );
+    const promedio = parseFloat( ( suma / datos.length ).toFixed( 2 ) );
 
+    
     return promedio;
 };
 
@@ -33,11 +36,12 @@ const objectToArray = ( object ) => {
 
     for ( const prop in object ) {
         object[ prop ] = parseFloat( object[ prop ] );
-        console.log( `${ prop }: ${ object[ prop ] }` );
+        // console.log( `${ prop }: ${ object[ prop ] }` );
 
         data.push( object[ prop ] );
 
     }
+    console.log( "o to a:", data );
     return data;
 
 };
@@ -68,7 +72,7 @@ export const calculosTotales = ( bases, valores ) => {
     let value = '';
 
 
-    console.log( "valores: ", valores );
+    // console.log( "valores: ", valores );
 
     let temp = {
         desc: '',
@@ -83,7 +87,7 @@ export const calculosTotales = ( bases, valores ) => {
         for ( const v in valores ) {
             // extrae ultima letra del elemento
             value = v.slice( -1 );
-            console.log( value );
+            // console.log( value );
 
             temp[ value ] = calcularDesbalance( bases[ b ], valores[ v ] ) + "%";
         }
@@ -108,12 +112,12 @@ export const calcularTipoCarga = ( angulos ) => {
         desc: 'TIPO DE CARGA'
     };
 
-    console.log( angulos );
+    // console.log( angulos );
 
     for ( const a in angulos ) {
         // extrae ultima letra del elemento
         value = a.slice( -1 );
-        console.log( a );
+        // console.log( a );
 
         temp[ value ] = obtenerTipoCarga( parseFloat( angulos[ a ] ) );
 
@@ -133,22 +137,30 @@ export const calcularTipoCarga = ( angulos ) => {
 
 
 export const colorDesviacion = ( valor ) => {
-    console.log( valor );
-    console.log( typeof ( valor ) === 'number' );
-    let className;
+    let long = valor.length - 1;
+    // console.log( "extrayendo: ", valor.substr( 1, long ) );
+    let num = 0.0;
+    // console.log( "TIPO DE DATOS", typeof ( valor.slice( -1 ) ) );
+    let className = "";
 
-    if ( typeof ( valor ) === 'number' ) {
-        valor = Math.abs( valor );
+    if ( valor.slice( -1 ) === '%' ) {
+        num = parseFloat( valor.substr( 1, long ) );
+        num = Math.abs( num );
 
-        if ( valor >= 0 && valor <= 2 ) {
+        // console.log( "NUMERO: ", num );
+
+        if ( num >= 0 && num <= 2 ) {
             className = 'table-success';
-        } else if ( valor > 2 && valor <= 5 ) {
+        } else if ( num > 2 && num <= 5 ) {
             className = 'table-warning';
         }
-        else if ( valor > 5 ) {
+        else if ( num > 5 ) {
             className = 'table-danger';
         }
+
     } else {
+
+        // console.log( className );
 
         switch ( valor ) {
             case 'CAPACITIVA':
@@ -160,10 +172,14 @@ export const colorDesviacion = ( valor ) => {
                 break;
 
             default:
+                className = 'table-dark';
                 break;
         }
 
     }
+
+
+    // console.log( className );
 
     return className;
 };
@@ -171,7 +187,7 @@ export const colorDesviacion = ( valor ) => {
 
 
 export const obtenerCorrienteMax = ( tipoMedida ) => {
-    console.log( tipoMedida );
+    // console.log( tipoMedida );
     let value = 0;
 
     switch ( tipoMedida ) {
@@ -183,6 +199,26 @@ export const obtenerCorrienteMax = ( tipoMedida ) => {
             break;
         case 'indirecta':
             value = 5;
+            break;
+
+        default:
+            break;
+    }
+
+    return value;
+
+};
+
+export const obtenerVoltajeMax = ( elementos ) => {
+    // console.log( tipoMedida );
+    let value = 0;
+
+    switch ( elementos ) {
+        case 2:
+            value = 110;
+            break;
+        case 3:
+            value = 69;
             break;
 
         default:

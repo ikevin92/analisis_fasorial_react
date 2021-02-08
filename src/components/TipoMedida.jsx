@@ -14,7 +14,6 @@ const TipoMedida = ( { setMostrarElementos, guardarTipoMedida } ) => {
         if ( tipoMedida === "" ) {
             setMostrarElementos( false );
             guardarTipoMedida( tipoMedida );
-
         } else {
             setMostrarElementos( true );
             guardarTipoMedida( tipoMedida );
@@ -24,16 +23,19 @@ const TipoMedida = ( { setMostrarElementos, guardarTipoMedida } ) => {
 
 
     return (
-        <select
-            name="tipomedida"
-            // value="0"
-            onChange={ handleChange }
-            className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option value="">Seleccione Tipo Medida: </option>
-            <option value="directa">Directa</option>
-            <option value="semi">Semi-directa</option>
-            <option value="indirecta">Indirecta</option>
-        </select>
+        <>
+            <label htmlFor="elementos"><h6>Tipo de Medida</h6></label>
+            <select
+                name="tipomedida"
+                // value="0"
+                onChange={ handleChange }
+                className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option value="">Seleccione Tipo Medida: </option>
+                <option value="directa">Directa</option>
+                <option value="semi">Semi-directa</option>
+                <option value="indirecta">Indirecta</option>
+            </select>
+        </>
     );
 };
 

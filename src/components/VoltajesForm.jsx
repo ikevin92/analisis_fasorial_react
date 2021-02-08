@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import Error from './Error';
+import Error from './ui/Error';
 import { calculaPromedio, calculaMaximo, calculaMinimo, calculosTotales } from '../helpers/calculos';
 import { obtenerEncabezados } from '../helpers/encabezados';
+import { diagnosticoVoltajes } from '../helpers/diagnosticos';
 
 
 
 
 
-const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulos } ) => {
+const VoltajesForm = ( { setDataVoltaje, elementos, setTablaVoltajes, setTitulos, crearDiagnostico, tipoMedida } ) => {
 
     const [ formValues, setFormValues ] = useState( {
         vla: 0,
@@ -36,10 +37,10 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
-        console.log( formValues );
+        // console.log( formValues );
 
         // VALIDACION TIPO MEDIDA
-        if ( tipoMedida === 2 ) {
+        if ( elementos === 2 ) {
 
             // se borra 1 elemento
             delete formValues.vlb;
@@ -55,7 +56,6 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
                 setMensajeError( "No se permiten valor nulos" );
                 return;
             }
-
         }
 
         const bases = {
@@ -67,15 +67,16 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
         // const { promedio, max, min } = bases;
 
         // funcion para el calculo total
-        const data = calculosTotales( bases, formValues );
-        setDataVoltaje( data );
+        const dataTotal = calculosTotales( bases, formValues );
+        setDataVoltaje( dataTotal );
 
-
+        // pasamos datos al diagnostico
+        const diagnostico = diagnosticoVoltajes( bases, dataTotal, tipoMedida, elementos );
+        crearDiagnostico( diagnostico );
         setTablaVoltajes( true );
 
-        const encabezados = obtenerEncabezados( tipoMedida );
-        console.log( encabezados );
-
+        const encabezados = obtenerEncabezados( elementos );
+        // console.log( encabezados );
         setTitulos( encabezados );
 
         // limpiamos cuando pase la validacion
@@ -98,21 +99,21 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
             }
             <form onSubmit={ handleSubmit } className="row g-2 text-center">
 
-                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ elementos > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="vla" ><h6>VLA</h6></label>
                     <input
                         type="number"
                         name="vla"
                         className="form-control"
                         placeholder="VLA"
-                        min="1"
+                        min="0"
                         step="any"
                         value={ vla }
                         onChange={ handleInputChange }
                     />
                 </div>
                 {
-                    ( tipoMedida > 2 ) &&
+                    ( elementos > 2 ) &&
                     <div className="form-group col-md-4 animate__animated animate__fadeIn">
                         <label htmlFor="vlb"><h6>VLB</h6></label>
                         <input
@@ -120,7 +121,7 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
                             name="vlb"
                             className="form-control"
                             placeholder="VLB"
-                            min="1"
+                            min="0"
                             step="any"
                             value={ vlb }
                             onChange={ handleInputChange }
@@ -129,14 +130,14 @@ const VoltajesForm = ( { setDataVoltaje, tipoMedida, setTablaVoltajes, setTitulo
 
                 }
 
-                <div className={ `animate__animated animate__fadeIn form-group ${ tipoMedida > 2 ? 'col-md-4' : 'col-md-6' }` }>
+                <div className={ `animate__animated animate__fadeIn form-group ${ elementos > 2 ? 'col-md-4' : 'col-md-6' }` }>
                     <label htmlFor="vlc"><h6>VLC</h6></label>
                     <input
                         name="vlc"
                         type="number"
                         className="form-control"
                         placeholder="VLC"
-                        min="1"
+                        min="0"
                         step="any"
                         value={ vlc }
                         onChange={ handleInputChange }
