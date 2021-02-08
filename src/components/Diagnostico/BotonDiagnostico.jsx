@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 
 const BotonDiagnostico = ( { habilitar, setMostrarDiagnostico, setBotonDiagnostico } ) => {
 
